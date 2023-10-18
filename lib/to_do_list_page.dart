@@ -25,7 +25,26 @@ class _TodoListPageState extends State<TodoListPage> {
       appBar: AppBar(
         title: Text("Todo List Page"),
       ),
-      body: Container(),
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        child: ListView.builder(
+            itemCount: listTodo.length,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  leading: Checkbox(onChanged: (_) { }, value: false),
+                  title: Text(listTodo[index]["name"] ?? "", style: TextStyle(fontSize: 20, color: Colors.teal)),
+                  subtitle: Text(listTodo[index]["time"] ?? "", style: TextStyle(fontSize: 14, color: Colors.red)),
+                  trailing: IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () {  },
+                  ),
+
+                )
+              );
+            },
+        )
+      ),
     );
   }
 }
