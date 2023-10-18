@@ -8,6 +8,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  int count = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void setCount(int value) {
+    setState(() {
+      count = value == 0 ? value : count + value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +35,20 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Count: 0", style: TextStyle(color: Colors.red, fontSize: 30)),
+                Text("Count: $count", style: TextStyle(color: Colors.red, fontSize: 30)),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(onPressed: () { }, child: Text("Increase")),
-                    ElevatedButton(onPressed: () { }, child: Text("Decrease")),
-                    ElevatedButton(onPressed: () { }, child: Text("Reset")),
+                    ElevatedButton(onPressed: () {
+                      setCount(1);
+                    }, child: Text("Increase")),
+                    ElevatedButton(onPressed: () {
+                      setCount(-1);
+                    }, child: Text("Decrease")),
+                    ElevatedButton(onPressed: () {
+                      setCount(0);
+                    }, child: Text("Reset")),
                   ],
                 )
               ],
