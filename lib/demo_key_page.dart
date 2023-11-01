@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class DemoKeyAndBuildContextPage extends StatefulWidget {
-  const DemoKeyAndBuildContextPage({super.key});
+class DemoKeyPage extends StatefulWidget {
+  const DemoKeyPage({super.key});
 
   @override
-  State<DemoKeyAndBuildContextPage> createState() =>
-      _DemoKeyAndBuildContextPageState();
+  State<DemoKeyPage> createState() =>
+      _DemoKeyPageState();
 }
 
-class _DemoKeyAndBuildContextPageState extends State<DemoKeyAndBuildContextPage> {
+class _DemoKeyPageState extends State<DemoKeyPage> {
   var listTile = <Widget>[
     Padding(
       padding: const EdgeInsets.all(8.0),
