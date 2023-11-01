@@ -57,12 +57,29 @@ class _TodoListPageState extends State<TodoListPage> {
     });
   }
 
+  void onClickCancelDialog() {
+    Navigator.pop(context);
+  }
+
+  void onClickUpdateDialog(Map<String, dynamic> itemTodo, String newName, DateTime newTime) {
+    setState(() {
+      String name = itemTodo["name"] ?? "";
+      DateTime time = itemTodo["time"] ?? DateTime.now();
+
+      if (name == newName && time.millisecondsSinceEpoch == newTime.millisecondsSinceEpoch) return;
+      itemTodo["name"] = newName;
+      itemTodo["time"] = newTime;
+      Navigator.pop(context);
+    });
+  }
+
   void onListenEditItem(int index) {
     Map<String, dynamic> itemTodo = listTodo[index];
     String name = itemTodo["name"] ?? "";
     DateTime time = itemTodo["time"] ?? DateTime.now();
     DateTime tmpTime = time;
 
+    TextEditingController textEditController = TextEditingController(text: name);
     showDialog(
         context: context,
         builder: (context) {
@@ -87,8 +104,9 @@ class _TodoListPageState extends State<TodoListPage> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextField(
+                        controller: textEditController,
+                        decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                         ),
                       ),
@@ -116,6 +134,14 @@ class _TodoListPageState extends State<TodoListPage> {
                           ],
                         ),
                       ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(onPressed: onClickCancelDialog, child: Text("Cancel")),
+                          ElevatedButton(onPressed: () => onClickUpdateDialog(itemTodo, textEditController.text, tmpTime), child: Text("Update")),
+                        ],
+                      )
                     ],
                   ),
                 ),
